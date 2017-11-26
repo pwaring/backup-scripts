@@ -29,7 +29,7 @@ tar --create --verbose --file=${FILEPATH} --exclude-from=${EXCLUDE_FILE} --files
 
 # Braces around command convert the list returned into an array
 # find returns in ascending order so use sort -r to reverse
-BACKUPS=($(find ${REPO} -name '*.tar.xz' | sort -r))
+BACKUPS=($(find ${REPO} -name *-${HOSTNAME}.tar.xz | sort -r))
 echo ${BACKUPS[*]}
 KEEP_BACKUPS=7
 BACKUP_COUNT=${#BACKUPS[@]}
