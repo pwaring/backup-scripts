@@ -1,4 +1,4 @@
-# backup-scripts
+# Backup scripts
 
 Wrapper scripts for various backup systems
 
