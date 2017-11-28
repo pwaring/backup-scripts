@@ -25,7 +25,7 @@ FILEPATH="${REPO}/${FILENAME}"
 
 tar --create --verbose --file=${FILEPATH} --exclude-from=${EXCLUDE_FILE} --files-from=${INCLUDE_FILE}
 
-# Delete all but 5 most recent backups
+# Delete all but 7 most recent backups
 
 # Braces around command convert the list returned into an array
 # find returns in ascending order so use sort -r to reverse
@@ -36,5 +36,5 @@ BACKUP_COUNT=${#BACKUPS[@]}
 
 for (( i=$(($KEEP_BACKUPS)); i<$(($BACKUP_COUNT)); i++ ))
 do
-  echo ${BACKUPS[$i]}
+  rm ${BACKUPS[$i]}
 done
