@@ -8,7 +8,7 @@ REPO=$1
 HOSTNAME=$(hostname)
 COMMON_ARGS=(
   "-r ${REPO}"
-  "--password-file ./${HOSTNAME}-password"
+  "--password-file ../${HOSTNAME}-password"
 )
 
 if [ -z ${REPO} ]; then
