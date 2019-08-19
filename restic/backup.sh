@@ -23,12 +23,12 @@ fi
 
 # Initialise repository if it does not already exist
 if [ ! -f ${REPO}/config ]; then
-  ~/bin/restic init ${COMMON_ARGS[*]}
+  restic init ${COMMON_ARGS[*]}
 fi
 
-~/bin/restic backup ${COMMON_ARGS[*]} --files-from ../${HOSTNAME}-include --exclude ../${HOSTNAME}-exclude
-~/bin/restic check ${COMMON_ARGS[*]}
+restic backup ${COMMON_ARGS[*]} --files-from ../${HOSTNAME}-include --exclude ../${HOSTNAME}-exclude
+restic check ${COMMON_ARGS[*]}
 
 # Prune and check again, because we are paranoid
-~/bin/restic forget ${COMMON_ARGS[*]} --keep-daily 90 --prune
-~/bin/restic check ${COMMON_ARGS[*]}
+restic forget ${COMMON_ARGS[*]} --keep-daily 90 --prune
+restic check ${COMMON_ARGS[*]}
