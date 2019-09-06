@@ -26,7 +26,7 @@ if [ ! -f ${REPO}/config ]; then
   restic init ${COMMON_ARGS[*]}
 fi
 
-restic backup ${COMMON_ARGS[*]} --files-from ../${HOSTNAME}-include --exclude ../${HOSTNAME}-exclude
+restic backup ${COMMON_ARGS[*]} --files-from ../${HOSTNAME}-include --exclude-file ../${HOSTNAME}-exclude
 restic check ${COMMON_ARGS[*]}
 
 # Prune and check again, because we are paranoid
