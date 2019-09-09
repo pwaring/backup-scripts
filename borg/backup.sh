@@ -31,8 +31,8 @@ fi
 
 # Backup everything and check it
 borg create -v --progress --stats ${REPO_ARCHIVE} ${INCLUDE_DIRS} --exclude-from ../${HOSTNAME}-exclude
-borg check ${REPO}
+borg check --progress ${REPO}
 
 # Prune and then check again, because we're paranoid
 borg prune -v --stats -d 90 ${REPO}
-borg check ${REPO}
+borg check --progress ${REPO}
