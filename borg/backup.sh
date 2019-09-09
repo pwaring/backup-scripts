@@ -35,4 +35,4 @@ borg check ${REPO}
 
 # Prune and then check again, because we're paranoid
 borg prune -v --stats -d 90 ${REPO}
-borg check ${REPO_ARCHIVE}
+borg check ${REPO}
