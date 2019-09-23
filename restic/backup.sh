@@ -26,6 +26,9 @@ if [ ! -f ${REPO}/config ]; then
   restic init ${COMMON_ARGS[*]}
 fi
 
+# Cleanup any old cache entries
+restic cache --cleanup
+
 restic backup ${COMMON_ARGS[*]} --files-from ../${HOSTNAME}-include --exclude-file ../${HOSTNAME}-exclude
 restic check ${COMMON_ARGS[*]}
 
