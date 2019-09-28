@@ -5,10 +5,13 @@ set -e
 set -x
 
 REPO=$1
+CURRENT_DIR=$(dirname $0)
 HOSTNAME=$(hostname)
+INCLUDE_FILE="${CURRENT_DIR}/../${HOSTNAME}-include"
+EXCLUDE_FILE="${CURRENT_DIR}/../${HOSTNAME}-exclude"
 COMMON_ARGS=(
   "-r ${REPO}"
-  "--password-file ../${HOSTNAME}-password"
+  "--password-file ${CURRENT_DIR}/../${HOSTNAME}-password"
 )
 
 if [ -z ${REPO} ]; then
@@ -29,7 +32,7 @@ fi
 # Cleanup any old cache entries
 restic cache --cleanup
 
-restic backup ${COMMON_ARGS[*]} --files-from ../${HOSTNAME}-include --exclude-file ../${HOSTNAME}-exclude
+restic backup ${COMMON_ARGS[*]} --files-from ${INCLUDE_FILE} --exclude-file ${EXCLUDE_FILE}
 restic check ${COMMON_ARGS[*]}
 
 # Prune and check again, because we are paranoid
