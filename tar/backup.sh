@@ -5,9 +5,10 @@ set -e
 set -x
 
 REPO=$1
+CURRENT_DIR=$(dirname $0)
 HOSTNAME=$(hostname)
-INCLUDE_FILE="../${HOSTNAME}-include"
-EXCLUDE_FILE="../${HOSTNAME}-exclude"
+INCLUDE_FILE="${CURRENT_DIR}/../${HOSTNAME}-include"
+EXCLUDE_FILE="${CURRENT_DIR}/../${HOSTNAME}-exclude"
 TODAY_DATE=$(date +'%Y-%m-%d')
 
 if [ -z ${REPO} ]; then
