@@ -16,25 +16,25 @@ REPO_ARCHIVE="${REPO}::${ARCHIVE_NAME}"
 INCLUDE_DIRS=$(cat ${CURRENT_DIR}/../${HOSTNAME}-include)
 EXCLUDE_FILE="${CURRENT_DIR}/../${HOSTNAME}-exclude"
 
-if [ -z ${REPO} ]; then
+if [ -z "${REPO}" ]; then
   echo "No REPO specified"
   exit 1
 fi
 
-if [ ! -d ${REPO} ]; then
+if [ ! -d "${REPO}" ]; then
   echo "REPO is not a directory: ${REPO}"
   exit 1
 fi
 
 # Initialise repository if it does not already exist
-if [ ! -f ${REPO}/config ]; then
-  borg init --encryption=none ${REPO}
+if [ ! -f "${REPO}/config" ]; then
+  borg init --encryption=none "${REPO}"
 fi
 
 # Backup everything and check it
-borg create -v --progress --stats ${REPO_ARCHIVE} ${INCLUDE_DIRS} --exclude-from ${EXCLUDE_FILE}
-borg check --progress ${REPO}
+borg create -v --progress --stats "${REPO_ARCHIVE}" ${INCLUDE_DIRS} --exclude-from "${EXCLUDE_FILE}"
+borg check --progress "${REPO}"
 
 # Prune and then check again, because we're paranoid
-borg prune -v --stats -d 90 ${REPO}
-borg check --progress ${REPO}
+borg prune -v --stats -d 90 "${REPO}"
+borg check --progress "${REPO}"
