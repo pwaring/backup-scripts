@@ -2,3 +2,4 @@
 *-exclude
 *-password
 *.swp
+pre-backup.sh

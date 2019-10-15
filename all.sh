@@ -21,6 +21,10 @@ BORG_REPO="${BASE_REPO}/borg/"
 RESTIC_REPO="${BASE_REPO}/restic/"
 TAR_REPO="${BASE_REPO}/tar/"
 
+if [ -e ${CURRENT_DIR}/pre-backup.sh ]; then
+  /bin/bash ${CURRENT_DIR}/pre-backup.sh
+fi
+
 /bin/bash ${CURRENT_DIR}/borg/backup.sh "${BORG_REPO}"
 /bin/bash ${CURRENT_DIR}/restic/backup.sh "${RESTIC_REPO}"
 /bin/bash ${CURRENT_DIR}/tar/backup.sh "${TAR_REPO}"
