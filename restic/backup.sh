@@ -3,6 +3,7 @@
 set -u
 set -e
 set -x
+set -o pipefail
 
 REPO=$1
 CURRENT_DIR=$(dirname "$0")
