@@ -33,6 +33,5 @@ restic cache --cleanup
 restic backup -r "${REPO}" --password-file "${PASSWORD_FILE}" --files-from "${INCLUDE_FILE}" --exclude-file "${EXCLUDE_FILE}"
 restic check -r "${REPO}" --password-file "${PASSWORD_FILE}"
 
-# Prune and check again, because we are paranoid
+# Prune anything more than 90 days
 restic forget -r "${REPO}" --password-file "${PASSWORD_FILE}" --keep-daily 90 --prune
-restic check -r "${REPO}" --password-file "${PASSWORD_FILE}"
