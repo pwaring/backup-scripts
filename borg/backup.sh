@@ -36,6 +36,5 @@ fi
 borg create -v --progress --stats "${REPO_ARCHIVE}" ${INCLUDE_DIRS} --exclude-from "${EXCLUDE_FILE}"
 borg check --progress "${REPO}"
 
-# Prune and then check again, because we're paranoid
+# Prune anything other than 90 days of backups 
 borg prune -v --stats -d 90 "${REPO}"
-borg check --progress "${REPO}"
