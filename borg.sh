@@ -14,8 +14,8 @@ HOSTNAME=$(hostname)
 CURRENT_DATE=$(date +'%Y-%m-%d-%H-%M-%S')
 ARCHIVE_NAME="${HOSTNAME}-${CURRENT_DATE}"
 REPO_ARCHIVE="${REPO}::${ARCHIVE_NAME}"
-INCLUDE_DIRS=$(cat ${CURRENT_DIR}/../${HOSTNAME}-include)
-EXCLUDE_FILE="${CURRENT_DIR}/../${HOSTNAME}-exclude"
+INCLUDE_DIRS=$(cat ${CURRENT_DIR}/${HOSTNAME}-include)
+EXCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-exclude"
 
 if [ -z "${REPO}" ]; then
   echo "No REPO specified"
