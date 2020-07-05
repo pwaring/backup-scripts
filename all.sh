@@ -28,4 +28,4 @@ fi
 
 /bin/bash ${CURRENT_DIR}/borg/backup.sh "${BORG_REPO}"
 /bin/bash ${CURRENT_DIR}/restic/backup.sh "${RESTIC_REPO}"
-/bin/bash ${CURRENT_DIR}/tar/backup.sh "${TAR_REPO}"
+/bin/bash ${CURRENT_DIR}/tar.sh "${TAR_REPO}"
