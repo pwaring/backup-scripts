@@ -8,9 +8,9 @@ set -o pipefail
 REPO=$1
 CURRENT_DIR=$(dirname "$0")
 HOSTNAME=$(hostname)
-INCLUDE_FILE="${CURRENT_DIR}/../${HOSTNAME}-include"
-EXCLUDE_FILE="${CURRENT_DIR}/../${HOSTNAME}-exclude"
-PASSWORD_FILE="${CURRENT_DIR}/../${HOSTNAME}-password"
+INCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-include"
+EXCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-exclude"
+PASSWORD_FILE="${CURRENT_DIR}/${HOSTNAME}-password"
 
 if [ -z "${REPO}" ]; then
   echo "No REPO specified"
