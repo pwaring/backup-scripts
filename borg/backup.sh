@@ -32,9 +32,30 @@ if [ ! -f "${REPO}/config" ]; then
   borg init --encryption=none "${REPO}"
 fi
 
-# Backup everything and check it
+# Backup everything
 borg create -v --progress --stats "${REPO_ARCHIVE}" ${INCLUDE_DIRS} --exclude-from "${EXCLUDE_FILE}"
-borg check --progress "${REPO}"
+
+# Only run borg check if this has not been done for more than 7 days, as this is an expensive operation
+BORG_CHECK=0
+BORG_CHECK_FILE="${REPO}/../borg-check"
+
+if [ ! -f "${BORG_CHECK_FILE}" ]; then
+  BORG_CHECK=1
+else
+  # Create a temporary file as of 7 days ago, then see if the borg check file is older
+  # This is a simple way of checking if the borg check file is older than 7 days
+  BORG_CHECK_TMP_FILE=$(mktemp)
+  touch -d"-7 day" "${BORG_CHECK_TMP_FILE}"
+
+  if [ "${BORG_CHECK_FILE}" -ot "${BORG_CHECK_TMP_FILE}" ]; then
+    BORG_CHECK=1
+  fi
+fi
+
+if [ $BORG_CHECK -eq 1 ]; then
+  borg check --progress "${REPO}"
+  touch ${BORG_CHECK_FILE}
+fi
 
 # Prune anything other than 90 days of backups 
 borg prune -v --stats -d 90 "${REPO}"
