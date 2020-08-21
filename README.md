@@ -1,6 +1,6 @@
 # Backup scripts
 
-Wrapper scripts for various backup systems
+Wrapper scripts for various backup systems (currently: borg, restic and tar).
 
 ## tar
 
@@ -17,3 +17,9 @@ The following limitations apply to the `tar` backup script:
 The `all.sh` wrapper script will check for a file called `pre-backup.sh` and
 execute it if it exists. This is useful if you wish to perform some tasks
 before starting a backup, such as exporting MySQL databases.
+
+## Limitations
+
+All the backup scripts suffer from the following limitations:
+
+ * Backups may fail if the repository path includes spaces.
