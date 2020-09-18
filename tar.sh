@@ -12,6 +12,22 @@ INCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-include"
 EXCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-exclude"
 TODAY_DATE=$(date +'%Y-%m-%d')
 
+# Check that all include and exclude directories exist, otherwise
+# tar will bail out later
+while read line; do
+  if [ ! -d ${line} ]; then
+    echo "${line} does not exist in ${INCLUDE_FILE}"
+    exit 1
+  fi
+done < ${INCLUDE_FILE}
+
+while read line; do
+  if [ ! -d ${line} ]; then
+    echo "${line} does not exist in ${EXCLUDE_FILE}"
+    exit 1
+  fi
+done < ${EXCLUDE_FILE}
+
 if [ -z "${REPO}" ]; then
   echo "No REPO specified"
   exit 1

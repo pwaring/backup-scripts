@@ -7,6 +7,24 @@ set -o pipefail
 
 BASE_REPO=$1
 CURRENT_DIR=$(dirname $0)
+HOSTNAME=$(hostname)
+INCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-include"
+EXCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-exclude"
+
+# Check that all include and exclude directories exist
+while read line; do
+  if [ ! -d ${line} ]; then
+    echo "${line} does not exist in ${INCLUDE_FILE}"
+    exit 1
+  fi
+done < ${INCLUDE_FILE}
+
+while read line; do
+  if [ ! -d ${line} ]; then
+    echo "${line} does not exist in ${EXCLUDE_FILE}"
+    exit 1
+  fi
+done < ${EXCLUDE_FILE}
 
 if [ -z "${BASE_REPO}" ]; then
   echo "No REPO specified"

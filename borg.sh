@@ -14,8 +14,25 @@ HOSTNAME=$(hostname)
 CURRENT_DATE=$(date +'%Y-%m-%d-%H-%M-%S')
 ARCHIVE_NAME="${HOSTNAME}-${CURRENT_DATE}"
 REPO_ARCHIVE="${REPO}::${ARCHIVE_NAME}"
-INCLUDE_DIRS=$(cat ${CURRENT_DIR}/${HOSTNAME}-include)
+INCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-include"
+INCLUDE_DIRS=$(cat ${INCLUDE_FILE})
 EXCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-exclude"
+
+# Check that all include and exclude directories exist, otherwise
+# borg will bail out later
+while read line; do
+  if [ ! -d ${line} ]; then
+    echo "${line} does not exist in ${INCLUDE_FILE}"
+    exit 1
+  fi
+done < ${INCLUDE_FILE}
+
+while read line; do
+  if [ ! -d ${line} ]; then
+    echo "${line} does not exist in ${EXCLUDE_FILE}"
+    exit 1
+  fi
+done < ${EXCLUDE_FILE}
 
 if [ -z "${REPO}" ]; then
   echo "No REPO specified"
