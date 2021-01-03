@@ -41,7 +41,29 @@ RESTIC_REPO="${BASE_REPO}/restic/"
 TAR_REPO="${BASE_REPO}/tar/"
 
 if [ -e ${CURRENT_DIR}/pre-backup.sh ]; then
-  /bin/bash ${CURRENT_DIR}/pre-backup.sh
+  # Only run pre-backups if this has not been done for more than 4 hours, as this is an expensive operation
+  # This is useful when we are running the all.sh backup script multiple times in quick succession, where
+  # the pre-backup information is unlikely to have changed
+  PB_RUN=0
+  PB_RUN_FILE="${CURRENT_DIR}/pre-backup-run"
+
+  if [ ! -f "${PB_RUN_FILE}" ]; then
+    PB_RUN=1
+  else
+    # Create a temporary file as of 4 hours ago, then see if the pre-backup run file is older
+    # This is a simple way of checking if the pre-backup run file is older than 4 hours
+    PB_RUN_TMP_FILE=$(mktemp)
+    touch -d"-4 hour" "${PB_RUN_TMP_FILE}"
+
+    if [ "${PB_RUN_FILE}" -ot "${PB_RUN_TMP_FILE}" ]; then
+      PB_RUN=1
+    fi
+  fi
+
+  if [ $PB_RUN -eq 1 ]; then
+    /bin/bash ${CURRENT_DIR}/pre-backup.sh
+    touch ${PB_RUN_FILE}
+  fi
 fi
 
 /bin/bash ${CURRENT_DIR}/borg.sh "${BORG_REPO}"

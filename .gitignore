@@ -3,3 +3,4 @@
 *-password
 *.swp
 pre-backup.sh
+pre-backup-run
