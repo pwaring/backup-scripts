@@ -4,11 +4,13 @@ Wrapper scripts for various backup systems (currently: borg, restic and tar).
 
 ## Configuration
 
+Place the password for restic backups in: $(hostname)-password
+
 Place directories you want to backup in: $(hostname)-include
 
 Place directories you do not want to backup in: $(hostname)-exclude
 
-Both files must end in a newline, otherwise the last directory will not be processed.
+Both include and exclude files must end in a newline, otherwise the last directory will not be processed.
 
 ## tar
 
