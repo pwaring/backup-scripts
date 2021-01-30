@@ -22,6 +22,18 @@ The following limitations apply to the `tar` backup script:
  * 7 backups are kept, all others are deleted (this is configurable).
  * Backup retention is based on the number of backups, not the number of days.
 
+## restic
+
+[restic](https://restic.net/) is an open source backup system written in Go. It is under active development and supports a wide range of backup sources. It supports deduplication and encryption.
+
+The latest version of restic is available as a Snap, or it can be built easily from source if you have a recent Go compiler.
+
+## Borg
+
+[Borg](https://www.borgbackup.org/) has been around for a long time (and is a fork of a previous project, Attic). It supports deduplication and encryption.
+
+
+
 ## Pre-backups
 
 The `all.sh` wrapper script will check for a file called `pre-backup.sh` and
