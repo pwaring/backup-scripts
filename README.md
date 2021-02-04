@@ -36,6 +36,12 @@ The latest version of restic is available as a Snap, or it can be built easily f
 
 [Borg](https://www.borgbackup.org/) has been around for a long time (and is a fork of a previous project, Attic). It supports deduplication and encryption.
 
+Initialise a Borg repository with:
+
+borg init --encryption=none "${REPO}"
+
+Note: no encryption is used in this example because the underlying block device is encrypted.
+
 Unfortunately the `borg check` function seems to operate very slowly in some circumstances, including backing up to a local drive, so the wrapper scripts in this repository will only run it if more than 7 days have passed since the previous check.
 
 An up to date version of Borg is available in Ubuntu in the `borgbackup` package.

@@ -44,9 +44,9 @@ if [ ! -d "${REPO}" ]; then
   exit 1
 fi
 
-# Initialise repository if it does not already exist
 if [ ! -f "${REPO}/config" ]; then
-  borg init --encryption=none "${REPO}"
+  echo "REPO is not a repository: ${REPO}"
+  exit 1
 fi
 
 # Backup everything

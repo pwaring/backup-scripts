@@ -38,7 +38,6 @@ if [ ! -d "${REPO}" ]; then
   exit 1
 fi
 
-# Initialise repository if it does not already exist
 if [ ! -f "${REPO}/config" ]; then
   echo "REPO is not a repository: ${REPO}"
   exit 1
