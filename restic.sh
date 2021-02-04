@@ -40,7 +40,8 @@ fi
 
 # Initialise repository if it does not already exist
 if [ ! -f "${REPO}/config" ]; then
-  restic init -r "${REPO}" --password-file "${PASSWORD_FILE}"
+  echo "REPO is not a repository: ${REPO}"
+  exit 1
 fi
 
 # Cleanup any old cache entries

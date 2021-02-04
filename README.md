@@ -26,6 +26,10 @@ The following limitations apply to the `tar` backup script:
 
 [restic](https://restic.net/) is an open source backup system written in Go. It is under active development and supports a wide range of backup sources. It supports deduplication and encryption.
 
+Initialise a restic repository with:
+
+restic init -r "${REPO}" --password-file "${PASSWORD_FILE}"
+
 The latest version of restic is available as a Snap, or it can be built easily from source if you have a recent Go compiler.
 
 ## Borg
