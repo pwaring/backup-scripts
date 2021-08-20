@@ -15,14 +15,14 @@ PASSWORD_FILE="${CURRENT_DIR}/${HOSTNAME}-password"
 # Check that all include and exclude directories exist, otherwise
 # restic will bail out later
 while read line; do
-  if [ ! -d ${line} ]; then
+  if [[ ! -d "${line}" && ! -f "${line}" ]]; then
     echo "${line} does not exist in ${INCLUDE_FILE}"
     exit 1
   fi
 done < ${INCLUDE_FILE}
 
 while read line; do
-  if [ ! -d ${line} ]; then
+  if [[ ! -d "${line}" && ! -f "${line}" ]]; then
     echo "${line} does not exist in ${EXCLUDE_FILE}"
     exit 1
   fi
