@@ -75,4 +75,4 @@ if [ $BORG_CHECK -eq 1 ]; then
 fi
 
 # Prune anything other than 90 days of backups 
-borg prune -v --stats -d 90 "${REPO}"
+borg prune -v --stats --list --keep-within 90d "${REPO}"
