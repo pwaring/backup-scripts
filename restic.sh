@@ -6,7 +6,7 @@ set -x
 set -o pipefail
 
 REPO=$1
-CURRENT_DIR=$(dirname "$0")
+CURRENT_DIR=$(dirname "${0}")
 HOSTNAME=$(hostname)
 INCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-include"
 EXCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-exclude"
@@ -14,19 +14,19 @@ PASSWORD_FILE="${CURRENT_DIR}/${HOSTNAME}-password"
 
 # Check that all include and exclude directories exist, otherwise
 # restic will bail out later
-while read line; do
+while read -r line; do
   if [[ ! -d "${line}" && ! -f "${line}" ]]; then
     echo "${line} does not exist in ${INCLUDE_FILE}"
     exit 1
   fi
-done < ${INCLUDE_FILE}
+done < "${INCLUDE_FILE}"
 
-while read line; do
+while read -r line; do
   if [[ ! -d "${line}" && ! -f "${line}" ]]; then
     echo "${line} does not exist in ${EXCLUDE_FILE}"
     exit 1
   fi
-done < ${EXCLUDE_FILE}
+done < "${EXCLUDE_FILE}"
 
 if [ -z "${REPO}" ]; then
   echo "No REPO specified"

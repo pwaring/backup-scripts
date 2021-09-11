@@ -6,7 +6,7 @@ set -x
 set -o pipefail
 
 REPO=$1
-CURRENT_DIR=$(dirname $0)
+CURRENT_DIR=$(dirname "${0}")
 
 # Borg requires that archive names are unique and you have to create a new
 # archive each time, so we use the hostname and the current date/time
@@ -15,24 +15,24 @@ CURRENT_DATE=$(date +'%Y-%m-%d-%H-%M-%S')
 ARCHIVE_NAME="${HOSTNAME}-${CURRENT_DATE}"
 REPO_ARCHIVE="${REPO}::${ARCHIVE_NAME}"
 INCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-include"
-INCLUDE_DIRS=$(cat ${INCLUDE_FILE})
+INCLUDE_DIRS=$(cat "${INCLUDE_FILE}")
 EXCLUDE_FILE="${CURRENT_DIR}/${HOSTNAME}-exclude"
 
 # Check that all include and exclude directories exist, otherwise
 # borg will bail out later
-while read line; do
+while read -r line; do
   if [[ ! -d "${line}" && ! -f "${line}" ]]; then
     echo "${line} does not exist in ${INCLUDE_FILE}"
     exit 1
   fi
-done < ${INCLUDE_FILE}
+done < "${INCLUDE_FILE}"
 
-while read line; do
+while read -r line; do
   if [[ ! -d "${line}" && ! -f "${line}" ]]; then
     echo "${line} does not exist in ${EXCLUDE_FILE}"
     exit 1
   fi
-done < ${EXCLUDE_FILE}
+done < "${EXCLUDE_FILE}"
 
 if [ -z "${REPO}" ]; then
   echo "No REPO specified"
@@ -71,7 +71,7 @@ fi
 
 if [ $BORG_CHECK -eq 1 ]; then
   borg check --progress "${REPO}"
-  touch ${BORG_CHECK_FILE}
+  touch "${BORG_CHECK_FILE}"
 fi
 
 # Prune anything other than 90 days of backups 
