@@ -66,6 +66,14 @@ if [ -e "${CURRENT_DIR}"/pre-backup.sh ]; then
   fi
 fi
 
-/bin/bash "${CURRENT_DIR}"/borg.sh "${BORG_REPO}"
-/bin/bash "${CURRENT_DIR}"/restic.sh "${RESTIC_REPO}"
-/bin/bash "${CURRENT_DIR}"/tar.sh "${TAR_REPO}"
+if [ -d "${BORG_REPO}" ]; then
+  /bin/bash "${CURRENT_DIR}"/borg.sh "${BORG_REPO}"
+fi
+
+if [ -d "${RESTIC_REPO}" ]; then
+  /bin/bash "${CURRENT_DIR}"/restic.sh "${RESTIC_REPO}"
+fi
+
+if [ -d "${TAR_REPO}" ]; then
+  /bin/bash "${CURRENT_DIR}"/tar.sh "${TAR_REPO}"
+fi
