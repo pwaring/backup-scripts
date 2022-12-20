@@ -2,5 +2,6 @@
 *-exclude
 *-password
 *.swp
+*.log
 pre-backup.sh
 pre-backup-run
