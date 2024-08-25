@@ -43,13 +43,13 @@ FILEPATH="${REPO}/${FILENAME}"
 
 tar --create --verbose --file="${FILEPATH}" --exclude-from="${EXCLUDE_FILE}" --files-from="${INCLUDE_FILE}"
 
-# Delete all but 7 most recent backups
+# Delete all but 5 most recent backups
 
 # Braces around command convert the list returned into an array
 # find returns in ascending order so use sort -r to reverse
 BACKUPS=($(find "${REPO}" -name "*-${HOSTNAME}.tar.xz" | sort -r))
 echo "${BACKUPS[*]}"
-KEEP_BACKUPS=7
+KEEP_BACKUPS=5
 BACKUP_COUNT=${#BACKUPS[@]}
 
 for (( i=$((KEEP_BACKUPS)); i<BACKUP_COUNT; i++ ))
