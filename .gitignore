@@ -3,5 +3,6 @@
 *-password
 *.swp
 *.log
+*.cnf
 pre-backup.sh
 pre-backup-run
